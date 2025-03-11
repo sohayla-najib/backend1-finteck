@@ -1,28 +1,30 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = require('../config/database'); // Ensure correct path for sequelize instance
-
-const User = sequelize.define('User', {
+const { sequelize } = require("../../../config/database");
+const User = sequelize.define(
+  "User",
+  {
     id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
     },
     name: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
     },
     passwordHash: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
-    // Disable timestamps if you don't need createdAt or updatedAt
-    timestamps: false
-});
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  },
+  {
+    timestamps: false, // Disable createdAt & updatedAt if not needed
+  }
+);
 
 module.exports = User;
