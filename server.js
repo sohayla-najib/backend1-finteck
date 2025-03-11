@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const { sequelize, connectDB } = require("./config/database");
-const authenticate = require("./src/config/routes/auth");
+const authenticate = require("./src/config/middleware/authMiddleware"); // ✅ Fixed import
 const authRoutes = require("./src/config/routes/auth");
 
 const app = express();
@@ -20,7 +20,7 @@ sequelize.sync({ alter: true });
 app.use("/api/auth", authRoutes);
 
 // Protected Home Route
-app.get("/api/Home", authenticate, async (req, res) => {
+app.get("/api/home", authenticate, async (req, res) => { // ✅ Now authenticate is defined
   try {
     res.json({ message: `Welcome, ${req.user.name}` });
   } catch (error) {
